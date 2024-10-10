@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name" translatable="false">EmoMind</string>
+    <string name="add_activity" translatable="true">Add activity</string>
+    <string name="difficulty_level" translatable="true">Difficulty level</string>
+    <string name="activity_name_hint" translatable="true">Activity name</string>
+    <string name="duration_hint" translatable="true">Duration (hh:mm)</string>
+    <string name="comments_hint" translatable="true">Comments for the activity</string>
+    <string name="category" translatable="true">Category</string>
+    <string name="add_activity_button" translatable="true">Add activity</string>
+    <string name="tag_prompt" translatable="true">Select a category</string>
+
+    <string name="add_mood" translatable="true">Add mood</string>
+    <string name="enter_comment_hint" translatable="true">Enter comment</string>
+    <string name="emotion_prompt" translatable="true">Select emotions</string>
+    <string name="choose_emotions" translatable="true">Choose emotions</string>
+    <string name="save" translatable="true">Save</string>
+
+    <string name="add_note" translatable="true">Add note</string>
+    <string name="topic_prompt" translatable="true">Select topic</string>
+
+    <string name="login" translatable="true">LOG IN</string>
+    <string name="login_hint" translatable="true">Login</string>
+    <string name="password_hint" translatable="true">Password</string>
+    <string name="login_button" translatable="true">Log in</string>
+    <string name="register_prompt" translatable="true">Don\'t have an account? Register</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+
+    <string name="set_goal" translatable="true">Set goal</string>
+    <string name="mood_statistics" translatable="true">Mood statistics</string>
+    <string name="go_to_profile" translatable="true">Go to profile</string>
+
+    <string name="mood_analysis" translatable="true">Mood analysis</string>
+    <string name="analyze" translatable="true">Analyze</string>
+    <string name="time_filter_prompt" translatable="true">Select a time period</string>
+
+    <string name="user_name" translatable="true">User name</string>
+    <string name="go_to_main" translatable="true">Go to main</string>
+    <string name="edit_profile" translatable="true">Edit profile</string>
+    <string name="notification_settings" translatable="true">Notification settings</string>
+    <string name="mood_reminder" translatable="true">Reminder to add a mood</string>
+    <string name="goal_reminder" translatable="true">Goal reminder</string>
+    <string name="delete_account" translatable="true">Delete account</string>
+    <string name="sign_out" translatable="true">Log out of account</string>
+    <string name="profile_picture" translatable="false">User\'s photo</string>
+    <string name="set_time">Set time</string>
+    <string name="mood_reminder_time">Mood reminder time</string>
+
+    <string name="editing" translatable="false">EDITING</string>
+    <string name="name_hint" translatable="true">Name</string>
+    <string name="confirm_password_hint" translatable="true">Confirm password</string>
+
+    <string name="registration" translatable="false">REGISTRATION</string>
+    <string name="password" translatable="false">Password (5 digits)</string>
+    <string name="create_account" translatable="false">Create account</string>
+    <string name="already_have_account" translatable="false">Already have an account? Log in</string>
+    <string name="confirm_password" translatable="false">Confirm password</string>
+    <string name="error_adding_user">An error occurred when adding a user. Try again.</string>
+
+    <string name="set_goals" translatable="false">Setting goals</string>
+    <string name="notes" translatable="false">Notes</string>
+    <string name="deadlines" translatable="false">Deadlines (dd.mm.yy)</string>
+    <string name="enter_goal" translatable="false">Enter goal</string>
+    <string name="reminder" translatable="false">Reminder (hh:mm)</string>
+    <string name="save_goal" translatable="false">Save goal</string>
+
+    <string name="invalid_credentials">Invalid credentials!</string>
+    <string name="username_exists">Such a login already exists! Come up with another one</string>
+    <string name="error_creating_account">An error occurred when creating an account!</string>
+    <string name="passwords_do_not_match">Passwords don\'t match!</string>
+</resources>

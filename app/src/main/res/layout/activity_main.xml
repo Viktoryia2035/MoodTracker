@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDECDF"
+    android:padding="16dp"
+    tools:ignore="MissingClass">
+
+    <Button
+        android:id="@+id/buttonAddPhoto3"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/set_goal"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <Button
+        android:id="@+id/buttonAddPhoto2"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/mood_statistics"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#24ADAD"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAddNote"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/add_note"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.347" />
+
+    <Button
+        android:id="@+id/buttonAddPhoto"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/go_to_profile"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
+
+    <Button
+        android:id="@+id/buttonAddMood"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/add_mood"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
+
+    <Button
+        android:id="@+id/buttonAddActivity"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="12dp"
+        android:text="@string/add_activity"
+        android:textColor="#EBEADB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="182dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/image_2024_09_21_17_05_37" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

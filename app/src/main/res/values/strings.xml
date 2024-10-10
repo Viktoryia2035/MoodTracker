@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name" translatable="false">EmoMind</string>
+    <string name="add_activity" translatable="true">Добавить занятие</string>
+    <string name="difficulty_level" translatable="true">Уровень сложности</string>
+    <string name="activity_name_hint" translatable="true">Название занятия</string>
+    <string name="duration_hint" translatable="true">Длительность (чч:мм)</string>
+    <string name="comments_hint" translatable="true">Комментарии к занятию</string>
+    <string name="category" translatable="true">Категория</string>
+    <string name="add_activity_button" translatable="true">Добавить занятие</string>
+    <string name="tag_prompt" translatable="true">Выберите категорию</string>
+
+    <string name="add_mood" translatable="true">Добавить настроение</string>
+    <string name="enter_comment_hint" translatable="true">Введите комментарий</string>
+    <string name="emotion_prompt" translatable="true">Выберите эмоции</string>
+    <string name="choose_emotions" translatable="true">Выберите эмоции</string>
+    <string name="save" translatable="true">Сохранить</string>
+
+    <string name="add_note" translatable="true">Добавить заметку</string>
+    <string name="topic_prompt" translatable="true">Выберите тему</string>
+
+    <string name="login" translatable="true">ВОЙТИ</string>
+    <string name="login_hint" translatable="true">Логин</string>
+    <string name="password_hint" translatable="true">Пароль</string>
+    <string name="login_button" translatable="true">Войти</string>
+    <string name="register_prompt" translatable="true">Нет аккаунта? Зарегистрироваться</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+
+    <string name="set_goal" translatable="true">Установить цель</string>
+    <string name="mood_statistics" translatable="true">Статистика настроения</string>
+    <string name="go_to_profile" translatable="true">Перейти в профиль</string>
+
+    <string name="mood_analysis" translatable="true">Анализ настроения</string>
+    <string name="analyze" translatable="true">Анализировать</string>
+    <string name="time_filter_prompt" translatable="true">Выберите период времени</string>
+
+    <string name="user_name" translatable="true">Имя пользователя</string>
+    <string name="go_to_main" translatable="true">На главную</string>
+    <string name="edit_profile" translatable="true">Редактировать профиль</string>
+    <string name="notification_settings" translatable="true">Настройки уведомлений</string>
+    <string name="mood_reminder" translatable="true">Напоминание о добавлении настроения</string>
+    <string name="goal_reminder" translatable="true">Напоминание о целях</string>
+    <string name="delete_account" translatable="true">Удалить аккаунт</string>
+    <string name="sign_out" translatable="true">Выйти из аккаунта</string>
+    <string name="profile_picture" translatable="false">Фото пользователя</string>
+    <string name="set_time">Установить время</string>
+    <string name="mood_reminder_time">Время напоминания о настроении</string>
+
+    <string name="editing" translatable="false">РЕДАКТИРОВАНИЕ</string>
+    <string name="name_hint" translatable="true">Имя</string>
+    <string name="confirm_password_hint" translatable="true">Подтверждение пароля</string>
+
+    <string name="registration" translatable="false">РЕГИСТРАЦИЯ</string>
+    <string name="password" translatable="false">Пароль (5 цифр)</string>
+    <string name="create_account" translatable="false">Создать аккаунт</string>
+    <string name="already_have_account" translatable="false">Уже есть аккаунт? Войти</string>
+    <string name="confirm_password" translatable="false">Подтверждение пароля</string>
+    <string name="error_adding_user">Ошибка при добавлении пользователя. Попробуйте еще раз.</string>
+
+    <string name="set_goals" translatable="false">Установка целей</string>
+    <string name="notes" translatable="false">Заметки</string>
+    <string name="deadlines" translatable="false">Сроки (дд.мм.гг)</string>
+    <string name="enter_goal" translatable="false">Введите цель</string>
+    <string name="reminder" translatable="false">Напоминание (чч:мм)</string>
+    <string name="save_goal" translatable="false">Сохранить цель</string>
+
+    <string name="invalid_credentials">Неверные учётные данные!</string>
+    <string name="username_exists">Такой логин уже существует! Придумайте другой</string>
+    <string name="error_creating_account">Ошибка при создании аккаунта!</string>
+    <string name="passwords_do_not_match">Пароли не совпадают!</string>
+</resources>

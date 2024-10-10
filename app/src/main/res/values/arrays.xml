@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tags_array">
+        <item>Работа</item>
+        <item>Досуг</item>
+        <item>Общение</item>
+        <item>Спорт</item>
+        <item>Учеба</item>
+        <item>Релаксация</item>
+    </string-array>
+
+    <string-array name="emotion_array">
+        <item>Гнев</item>
+        <item>Страх</item>
+        <item>Неприязнь</item>
+        <item>Паника</item>
+        <item>Отвращение</item>
+        <item>Разочарование</item>
+        <item>Ненависть</item>
+        <item>Агрессия</item>
+        <item>Безразличие</item>
+        <item>Проблема</item>
+    </string-array>
+
+    <string-array name="topics_array">
+        <item>Работа</item>
+        <item>Личное</item>
+        <item>Учеба</item>
+        <item>Досуг</item>
+        <item>Спорт</item>
+    </string-array>
+
+    <string-array name="period_array">
+        <item>Сегодня</item>
+        <item>Неделя</item>
+        <item>Месяц</item>
+        <item>Год</item>
+    </string-array>
+
+    <string-array name="intensity_levels_array">
+        <item>Легкий</item>
+        <item>Умеренный</item>
+        <item>Тяжелый</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Русский</item>
+        <item>English</item>
+    </string-array>
+</resources>

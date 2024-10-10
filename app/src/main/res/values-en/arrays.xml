@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tags_array">
+        <item>Work</item>
+        <item>Leisure</item>
+        <item>Communication</item>
+        <item>Sport</item>
+        <item>Study</item>
+        <item>Relaxation</item>
+    </string-array>
+
+    <string-array name="emotion_array">
+        <item>Anger</item>
+        <item>Fear</item>
+        <item>Dislike</item>
+        <item>Panicking</item>
+        <item>Disgust</item>
+        <item>Disappointment</item>
+        <item>Hatred</item>
+        <item>Aggression</item>
+        <item>Indifference</item>
+        <item>Problem</item>
+    </string-array>
+
+    <string-array name="topics_array">
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Study</item>
+        <item>Leisure</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string-array name="period_array">
+        <item>Today</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+
+    <string-array name="intensity_levels_array">
+        <item>Light</item>
+        <item>Moderate</item>
+        <item>Severe</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
+</resources>
