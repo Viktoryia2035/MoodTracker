@@ -1,16 +1,21 @@
 package com.mindhealth.EmoMind
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
 class RegisterActivity : AppCompatActivity() {
+    private var startX: Float = 0f
+    private var endX: Float = 0f
     private lateinit var nativeLib: NativeLib
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var editTextName: EditText
@@ -19,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var createAccountButton: Button
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -33,33 +39,64 @@ class RegisterActivity : AppCompatActivity() {
         createAccountButton = findViewById(R.id.buttonCreateAccount)
 
         createAccountButton.setOnClickListener {
-            val name = editTextName.text.toString()
-            val username = editTextText.text.toString()
-            val password = editTextPassword.text.toString()
-            val confirmPassword = editTextConfirmPassword.text.toString()
+            val name = editTextName.text.toString().trim()
+            val username = editTextText.text.toString().trim()
+            val password = editTextPassword.text.toString().trim()
+            val confirmPassword = editTextConfirmPassword.text.toString().trim()
+
+            if (name.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (password != confirmPassword) {
                 Toast.makeText(this, getString(R.string.passwords_do_not_match), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Проверка на существование имени пользователя
             if (nativeLib.isUserValid(username, password)) {
                 Toast.makeText(this, getString(R.string.username_exists), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Добавление нового пользователя в базу данных
             if (!dbHelper.addUser(username, password, name)) {
                 Toast.makeText(this, getString(R.string.error_adding_user), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Переход к следующему экрану
-            val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("NAME", name) // Ensure this is of type String
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            with(sharedPreferences.edit()) {
+                putString("NAME", name)
+                apply()
+            }
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("NAME", name)
             startActivity(intent)
             finish()
+        }
+
+        val textViewLogin = findViewById<TextView>(R.id.textViewLogin)
+        textViewLogin.setOnClickListener {
+            swipeRight()
+        }
+
+        window.decorView.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    startX = event.x
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    endX = event.x
+                    when {
+                        endX > startX -> swipeRight()
+                        startX > endX -> swipeLeft()
+                    }
+                    true
+                }
+                else -> false
+            }
         }
     }
 

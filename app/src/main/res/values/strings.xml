@@ -8,12 +8,29 @@
     <string name="category" translatable="true">Категория</string>
     <string name="add_activity_button" translatable="true">Добавить занятие</string>
     <string name="tag_prompt" translatable="true">Выберите категорию</string>
+    <string name="fill_all_fields">Пожалуйста, заполните все поля</string>
+    <string name="incorrect_time_format">Введите длительность в корректном формате чч:мм</string>
+    <string name="activity_added">Занятие добавлено</string>
+    <string name="error_adding_activity">Ошибка при добавлении занятия</string>
 
     <string name="add_mood" translatable="true">Добавить настроение</string>
     <string name="enter_comment_hint" translatable="true">Введите комментарий</string>
     <string name="emotion_prompt" translatable="true">Выберите эмоции</string>
     <string name="choose_emotions" translatable="true">Выберите эмоции</string>
     <string name="save" translatable="true">Сохранить</string>
+    <string name="login_error">Ошибка: логин не передан</string>
+    <string name="user_not_found_error">Ошибка: пользователь не найден</string>
+    <string name="no_mood_selected_error">Ошибка: настроение не выбрано</string>
+    <string name="mood_saved_success">Настроение успешно сохранено</string>
+    <string name="mood_save_error">Ошибка сохранения настроения</string>
+    <string name="select_emotions_title">Выберите эмоции</string>
+    <string name="done_button">Готово</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="selected_mood_horrible">Выбрано настроение: Ужасно</string>
+    <string name="selected_mood_bad">Выбрано настроение: Плохо</string>
+    <string name="selected_mood_okay">Выбрано настроение: Так себе</string>
+    <string name="selected_mood_good">Выбрано настроение: Хорошо</string>
+    <string name="selected_mood_super">Выбрано настроение: Супер</string>
 
     <string name="add_note" translatable="true">Добавить заметку</string>
     <string name="topic_prompt" translatable="true">Выберите тему</string>
@@ -25,6 +42,9 @@
     <string name="register_prompt" translatable="true">Нет аккаунта? Зарегистрироваться</string>
     <string name="english">Английский</string>
     <string name="russian">Русский</string>
+    <string name="error_login">Неправильный логин или пароль</string>
+    <string name="error_empty_login">Пожалуйста, введите ваш логин</string>
+    <string name="error_empty_password">Пожалуйста, введите ваш пароль</string>
 
     <string name="set_goal" translatable="true">Установить цель</string>
     <string name="mood_statistics" translatable="true">Статистика настроения</string>
@@ -55,7 +75,9 @@
     <string name="create_account" translatable="false">Создать аккаунт</string>
     <string name="already_have_account" translatable="false">Уже есть аккаунт? Войти</string>
     <string name="confirm_password" translatable="false">Подтверждение пароля</string>
-    <string name="error_adding_user">Ошибка при добавлении пользователя. Попробуйте еще раз.</string>
+    <string name="error_adding_user">Ошибка при добавлении пользователя. Попробуйте еще раз</string>
+    <string name="error_empty_fields">Пожалуйста, заполните все поля</string>
+    <string name="name_exists">Имя пользователя уже существует.</string>
 
     <string name="set_goals" translatable="false">Установка целей</string>
     <string name="notes" translatable="false">Заметки</string>

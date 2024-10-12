@@ -18,7 +18,7 @@ object LocaleManager {
     }
 
     fun updateResources(context: Context, locale: Locale) {
-        val config = Configuration()
+        val config = context.resources.configuration
         config.setLocale(locale)
         config.setLayoutDirection(locale)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)

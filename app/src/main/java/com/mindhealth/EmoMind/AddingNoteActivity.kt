@@ -6,9 +6,13 @@ import android.view.MotionEvent
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddingNoteActivity : AppCompatActivity() {
     private var startX: Float = 0f
@@ -17,6 +21,8 @@ class AddingNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_note)
+
+        val databaseHelper = DatabaseHelper(this) // Подключение к базе данных
 
         val spinnerTopics: Spinner = findViewById(R.id.spinnerTopics)
         val topics = resources.getStringArray(R.array.topics_array)
@@ -31,10 +37,23 @@ class AddingNoteActivity : AppCompatActivity() {
             val comment = editTextComment.text.toString()
             val selectedTopic = spinnerTopics.selectedItem.toString()
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            // Получаем текущее время
+            val currentTimestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+
+            // Сохраняем заметку в базу данных
+            val isAdded = databaseHelper.addNote(selectedTopic, comment, currentTimestamp)
+
+            if (isAdded) {
+                // Если запись успешно добавлена, переходим на главную страницу
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Выводим сообщение об ошибке
+                Toast.makeText(this, "Ошибка при сохранении заметки", Toast.LENGTH_SHORT).show()
+            }
         }
 
+        // Логика свайпов
         window.decorView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

@@ -20,7 +20,18 @@
         <item>Aggression</item>
         <item>Indifference</item>
         <item>Problem</item>
+        <item>Happiness</item>
+        <item>Satisfaction</item>
+        <item>Delight</item>
+        <item>Boredom</item>
+        <item>Sadness</item>
+        <item>Anxiety</item>
+        <item>Stress</item>
+        <item>Calmness</item>
+        <item>Hope</item>
+        <item>Confidence</item>
     </string-array>
+
 
     <string-array name="topics_array">
         <item>Work</item>

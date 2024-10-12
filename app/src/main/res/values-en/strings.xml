@@ -8,12 +8,29 @@
     <string name="category" translatable="true">Category</string>
     <string name="add_activity_button" translatable="true">Add activity</string>
     <string name="tag_prompt" translatable="true">Select a category</string>
+    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="incorrect_time_format">Enter duration in correct format hh:mm</string>
+    <string name="activity_added">Activity added</string>
+    <string name="error_adding_activity">Error adding activity</string>
 
     <string name="add_mood" translatable="true">Add mood</string>
     <string name="enter_comment_hint" translatable="true">Enter comment</string>
     <string name="emotion_prompt" translatable="true">Select emotions</string>
     <string name="choose_emotions" translatable="true">Choose emotions</string>
     <string name="save" translatable="true">Save</string>
+    <string name="login_error">Error: login not passed</string>
+    <string name="user_not_found_error">Error: user not found</string>
+    <string name="no_mood_selected_error">Error: mood not selected</string>
+    <string name="mood_saved_success">Mood saved successfully</string>
+    <string name="mood_save_error">Error saving mood</string>
+    <string name="select_emotions_title">Select Emotions</string>
+    <string name="done_button">Done</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="selected_mood_horrible">Selected mood: Horrible</string>
+    <string name="selected_mood_bad">Selected mood: Bad</string>
+    <string name="selected_mood_okay">Selected mood: Okay</string>
+    <string name="selected_mood_good">Selected mood: Good</string>
+    <string name="selected_mood_super">Selected mood: Super</string>
 
     <string name="add_note" translatable="true">Add note</string>
     <string name="topic_prompt" translatable="true">Select topic</string>
@@ -25,6 +42,9 @@
     <string name="register_prompt" translatable="true">Don\'t have an account? Register</string>
     <string name="english">English</string>
     <string name="russian">Russian</string>
+    <string name="error_login">Incorrect login or password</string>
+    <string name="error_empty_login">Please, enter your login</string>
+    <string name="error_empty_password">Please, enter your password</string>
 
     <string name="set_goal" translatable="true">Set goal</string>
     <string name="mood_statistics" translatable="true">Mood statistics</string>
@@ -55,7 +75,9 @@
     <string name="create_account" translatable="false">Create account</string>
     <string name="already_have_account" translatable="false">Already have an account? Log in</string>
     <string name="confirm_password" translatable="false">Confirm password</string>
-    <string name="error_adding_user">An error occurred when adding a user. Try again.</string>
+    <string name="error_adding_user">An error occurred when adding a user. Try again</string>
+    <string name="error_empty_fields">Please fill in all fields</string>
+    <string name="name_exists">Username already exists.</string>
 
     <string name="set_goals" translatable="false">Setting goals</string>
     <string name="notes" translatable="false">Notes</string>

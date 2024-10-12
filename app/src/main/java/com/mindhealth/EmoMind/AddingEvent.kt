@@ -11,25 +11,37 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddingEvent : AppCompatActivity() {
     private var startX: Float = 0f
     private var endX: Float = 0f
+    private lateinit var databaseHelper: DatabaseHelper
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "StringFormatInvalid")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_event)
+
+        databaseHelper = DatabaseHelper(this)
 
         val activityNameEditText = findViewById<EditText>(R.id.editTextActivityName)
         val durationEditText = findViewById<EditText>(R.id.editTextDuration)
         val commentsEditText = findViewById<EditText>(R.id.editTextComments)
         val intensitySpinner = findViewById<Spinner>(R.id.spinnerIntensity)
+        val categorySpinner = findViewById<Spinner>(R.id.spinnerTags) // Assuming you have a category spinner
 
         val intensityLevels = resources.getStringArray(R.array.intensity_levels_array)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, intensityLevels)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         intensitySpinner.adapter = adapter
+
+        val categories = resources.getStringArray(R.array.tags_array) // Add this to your strings.xml
+        val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categorySpinner.adapter = categoryAdapter
 
         val saveAddButton = findViewById<Button>(R.id.buttonAddActivity)
         saveAddButton.setOnClickListener {
@@ -37,18 +49,25 @@ class AddingEvent : AppCompatActivity() {
             val duration = durationEditText.text.toString()
             val comments = commentsEditText.text.toString()
             val selectedIntensity = intensitySpinner.selectedItem.toString()
+            val selectedCategory = categorySpinner.selectedItem.toString()
 
             if (activityName.isEmpty() || duration.isEmpty() || comments.isEmpty()) {
-                Toast.makeText(this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             } else if (!isValidTimeFormat(duration)) {
-                Toast.makeText(this, "Введите длительность в корректном формате чч:мм", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.incorrect_time_format), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Занятие добавлено: $activityName\nУровень: $selectedIntensity", Toast.LENGTH_SHORT).show()
+                val currentTimestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
-                val mainIntent = Intent(this, MainActivity::class.java)
-                mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(mainIntent)
-                finish()
+                if (databaseHelper.addActivity(activityName, selectedCategory, selectedIntensity, duration, comments, currentTimestamp)) {
+                    Toast.makeText(this, getString(R.string.activity_added, activityName, selectedIntensity), Toast.LENGTH_SHORT).show()
+
+                    val mainIntent = Intent(this, MainActivity::class.java)
+                    mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(mainIntent)
+                    finish()
+                } else {
+                    Toast.makeText(this, getString(R.string.error_adding_activity), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

@@ -6,55 +6,54 @@ import android.view.MotionEvent
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class RedactorProfileActivity : AppCompatActivity() {
+    private lateinit var databaseHelper: DatabaseHelper
+    private var login: String? = null
     private var startX: Float = 0f
     private var endX: Float = 0f
-    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redactor_profile)
 
-        // Initialize DatabaseHelper
-        dbHelper = DatabaseHelper(this)
+        databaseHelper = DatabaseHelper(this)
 
-        // Get passed data (username)
-        val username: String? = intent.getStringExtra("LOGIN")
+        // Получаем логин пользователя из Intent
+        login = intent.getStringExtra("LOGIN")
 
-        // Retrieve existing user data from the database
-        username?.let {
-            val user = dbHelper.getAllUsers().firstOrNull { userData ->
-                userData.first == username
-            }
+        val nameEditText = findViewById<EditText>(R.id.editTextName)
+        val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
+        val saveButton = findViewById<Button>(R.id.buttonCreateAccount)
 
-            // Populate fields with existing user data
-            user?.let { userData ->
-                val (userLogin, userName) = userData
-                findViewById<EditText>(R.id.editTextText).setText(userLogin)
-                findViewById<EditText>(R.id.editTextPassword).setText(dbHelper.getPassword(userLogin))
-                findViewById<EditText>(R.id.editTextName).setText(userName)
-            }
+        // Получаем текущие данные пользователя
+        login?.let { userLogin ->
+            val currentPassword = databaseHelper.getPassword(userLogin)
+            val currentName = databaseHelper.getAllUsers().find { it.first == userLogin }?.second
+
+            // Устанавливаем текущие значения в поля редактирования
+            currentName?.let { nameEditText.setText(it) }
+            currentPassword?.let { passwordEditText.setText(it) }
         }
 
-        // Handle save button click
-        val saveButton: Button = findViewById(R.id.buttonCreateAccount)
         saveButton.setOnClickListener {
-            val newUsername: String = findViewById<EditText>(R.id.editTextText).text.toString()
-            val newPassword: String = findViewById<EditText>(R.id.editTextPassword).text.toString()
-            val name: String = findViewById<EditText>(R.id.editTextName).text.toString()
+            val newName = nameEditText.text.toString()
+            val newPassword = passwordEditText.text.toString()
 
-            // Update user data in the database
-            dbHelper.updateUser(name, newUsername, newPassword, null)
+            // Обновляем данные пользователя
+            login?.let { userLogin ->
+                val isUpdated = databaseHelper.updateUser(userLogin, newName, newPassword)
 
-            // Navigate to profile screen with updated data
-            val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("LOGIN", newUsername)
-            startActivity(intent)
-            finish()
+                if (isUpdated) {
+                    Toast.makeText(this, "Профиль успешно обновлен", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Ошибка обновления профиля", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-
         // Handle swipe gestures
         window.decorView.setOnTouchListener { v, event ->
             when (event.action) {

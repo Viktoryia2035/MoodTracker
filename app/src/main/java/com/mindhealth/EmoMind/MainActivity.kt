@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private var name: String? = null
+    private var login: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,38 +17,60 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
+        login = intent.getStringExtra("LOGIN")
+
+        if (login == null) {
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            login = sharedPreferences.getString("LOGIN", null)
+        }
+
         name = intent.getStringExtra("NAME")
 
         val users = dbHelper.getAllUsers()
-        for ((login, name) in users) {
-            Log.d("User Info", "Username: $login, Name: $name")
+        for (user in users) {
+            Log.d("Users", "Login: ${user.first}, Name: ${user.second}")
         }
 
-        findViewById<Button>(R.id.buttonAddMood).setOnClickListener {
-            startActivity(Intent(this, AddingMoodActivity::class.java))
-        }
-
-        findViewById<Button>(R.id.buttonAddActivity).setOnClickListener {
-            startActivity(Intent(this, AddingEvent::class.java))
-        }
-
-        findViewById<Button>(R.id.buttonAddNote).setOnClickListener {
-            startActivity(Intent(this, AddingNoteActivity::class.java))
-        }
-
-        findViewById<Button>(R.id.buttonAddPhoto).setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            Log.d("MainActivity", "Sending name to ProfileActivity: $name")
-            intent.putExtra("NAME", name)
+        val addMoodButton = findViewById<Button>(R.id.buttonAddMood)
+        addMoodButton.setOnClickListener {
+            val intent = Intent(this, AddingMoodActivity::class.java)
+            intent.putExtra("LOGIN", login)
             startActivity(intent)
         }
 
-        findViewById<Button>(R.id.buttonAddPhoto3).setOnClickListener {
-            startActivity(Intent(this, SettingGoalsActivity::class.java))
+        val addEventButton = findViewById<Button>(R.id.buttonAddActivity)
+        addEventButton.setOnClickListener {
+            val intent = Intent(this, AddingEvent::class.java)
+            intent.putExtra("LOGIN", login)
+            startActivity(intent)
         }
 
-        findViewById<Button>(R.id.buttonAddPhoto2).setOnClickListener {
-            startActivity(Intent(this, MoodAnalysisActivity::class.java))
+        val addNoteButton = findViewById<Button>(R.id.buttonAddNote)
+        addNoteButton.setOnClickListener {
+            val intent = Intent(this, AddingNoteActivity::class.java)
+            intent.putExtra("LOGIN", login)
+            startActivity(intent)
+        }
+
+        val addGoalButton = findViewById<Button>(R.id.buttonAddPhoto3)
+        addGoalButton.setOnClickListener {
+            val intent = Intent(this, SettingGoalsActivity::class.java)
+            intent.putExtra("LOGIN", login)
+            startActivity(intent)
+        }
+
+        val moodAnalysisButton = findViewById<Button>(R.id.buttonAddPhoto2)
+        moodAnalysisButton.setOnClickListener {
+            val intent = Intent(this, MoodAnalysisActivity::class.java)
+            intent.putExtra("LOGIN", login)
+            startActivity(intent)
+        }
+
+        val profileButton = findViewById<Button>(R.id.buttonAddPhoto)
+        profileButton.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("NAME", name)
+            startActivity(intent)
         }
     }
 }

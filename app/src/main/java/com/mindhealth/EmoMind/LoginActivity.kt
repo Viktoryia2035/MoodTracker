@@ -3,9 +3,7 @@ package com.mindhealth.EmoMind
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,82 +13,89 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
     private var startX: Float = 0f
     private var endX: Float = 0f
     private lateinit var dbHelper: DatabaseHelper
 
-    @SuppressLint("MissingInflatedId", "ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val currentLocaleString = LocaleManager.getCurrentLocale(this)
-        LocaleManager.updateResources(this, Locale(currentLocaleString))
-
+        LocaleManager.setLocale(this, LocaleManager.getCurrentLocale(this))
         setContentView(R.layout.activity_login)
 
         dbHelper = DatabaseHelper(this)
 
         val loginEditText = findViewById<EditText>(R.id.editTextLogin)
         val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
-        val registerButton = findViewById<TextView>(R.id.textViewRegister)
-
-        registerButton.setOnClickListener {
-            swipeRight()
-        }
+        val loginButton = findViewById<Button>(R.id.buttonLogin)
 
         val spinnerLanguage = findViewById<Spinner>(R.id.spinnerLanguage)
-        val languages = arrayOf("Русский", "English")
+
+        val languages = resources.getStringArray(R.array.languages)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         spinnerLanguage.adapter = adapter
 
-        val currentLangIndex = if (currentLocaleString == "ru") 0 else 1
-        spinnerLanguage.setSelection(currentLangIndex)
-
         spinnerLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val lang = if (position == 0) "ru" else "en"
-                LocaleManager.setLocale(this@LoginActivity, lang)
+            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
+                if (view == null) return
 
-                updateUIWithStrings(
-                    R.string.login,
-                    R.string.login_hint,
-                    R.string.password_hint,
-                    R.string.login_button,
-                    R.string.register_prompt
-                )
+                val selectedLanguage = when (position) {
+                    0 -> "ru"
+                    1 -> "en"
+                    else -> "ru"
+                }
+
+                if (LocaleManager.getCurrentLocale(this@LoginActivity) != selectedLanguage) {
+                    LocaleManager.setLocale(this@LoginActivity, selectedLanguage)
+                    recreate()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
 
-        val loginButton = findViewById<Button>(R.id.buttonLogin)
         loginButton.setOnClickListener {
-            val login = loginEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val login = loginEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-            if (dbHelper.isUserValid(login, password)) {
-                val user = dbHelper.getAllUsers().find { it.first == login }
-                val name = user?.second
+            if (login.isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_empty_login), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_empty_password), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (dbHelper.checkUser(login, password)) {
+                val name = dbHelper.getAllUsers().find { it.first == login }?.second
+
+                val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                with(sharedPreferences.edit()) {
+                    putString("LOGIN", login)
+                    apply()
+                }
 
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("LOGIN", login)
                 if (name != null) {
                     intent.putExtra("NAME", name)
-                } else {
-                    Log.e("LoginActivity", "User name not found for login: $login")
-                    Toast.makeText(this, "Username not found", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
                 }
                 startActivity(intent)
                 finish()
-            } else {
-                Toast.makeText(this, getString(R.string.invalid_credentials), Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val registerPromptTextView = findViewById<TextView>(R.id.textViewRegister)
+        registerPromptTextView.setOnClickListener {
+            swipeRight()
         }
 
         window.decorView.setOnTouchListener { _, event ->
@@ -125,22 +130,8 @@ class LoginActivity : AppCompatActivity() {
         val animation = AnimationUtils.loadAnimation(this, R.anim.swipe_left)
         window.decorView.startAnimation(animation)
 
-        val loginIntent = Intent(this, LoginActivity::class.java)
+        val loginIntent = Intent(this, RegisterActivity::class.java)
         startActivity(loginIntent)
         finish()
-    }
-
-    private fun updateUIWithStrings(
-        loginText: Int,
-        loginHint: Int,
-        passwordHint: Int,
-        loginButtonText: Int,
-        registerPrompt: Int
-    ) {
-        findViewById<TextView>(R.id.textViewLogin).text = getString(loginText)
-        findViewById<EditText>(R.id.editTextLogin).hint = getString(loginHint)
-        findViewById<EditText>(R.id.editTextPassword).hint = getString(passwordHint)
-        findViewById<Button>(R.id.buttonLogin).text = getString(loginButtonText)
-        findViewById<TextView>(R.id.textViewRegister).text = getString(registerPrompt)
     }
 }

@@ -20,7 +20,18 @@
         <item>Агрессия</item>
         <item>Безразличие</item>
         <item>Проблема</item>
+        <item>Счастье</item>
+        <item>Удовлетворение</item>
+        <item>Восторг</item>
+        <item>Скука</item>
+        <item>Печаль</item>
+        <item>Тревога</item>
+        <item>Стресс</item>
+        <item>Спокойствие</item>
+        <item>Надежда</item>
+        <item>Уверенность</item>
     </string-array>
+
 
     <string-array name="topics_array">
         <item>Работа</item>
