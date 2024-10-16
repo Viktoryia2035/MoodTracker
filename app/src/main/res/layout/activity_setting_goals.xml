@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/custom_edittext_shape"
         android:hint="@string/deadlines"
+        android:inputType="phone"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,20 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.203" />
-
-    <EditText
-        android:id="@+id/editTextSleepReminder"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_edittext_shape"
-        android:hint="@string/reminder"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
 
     <Button
         android:id="@+id/buttonSaveGoals"

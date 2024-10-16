@@ -56,8 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         loginButton.setOnClickListener {
@@ -79,7 +78,8 @@ class LoginActivity : AppCompatActivity() {
 
                 val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                 with(sharedPreferences.edit()) {
-                    putString("LOGIN", login)
+                    putString("username", login) // Используем "username" для логина
+                    putString("name", name) // Сохраняем имя пользователя
                     apply()
                 }
 
@@ -90,6 +90,8 @@ class LoginActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
                 finish()
+            } else {
+                Toast.makeText(this, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
             }
         }
 

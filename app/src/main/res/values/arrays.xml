@@ -41,11 +41,17 @@
         <item>Спорт</item>
     </string-array>
 
+    <string-array name="data_type_array">
+        <item>Настроения</item>
+        <item>Заметки</item>
+        <item>Занятия</item>
+        <item>Цели</item>
+    </string-array>
+
     <string-array name="period_array">
         <item>Сегодня</item>
         <item>Неделя</item>
         <item>Месяц</item>
-        <item>Год</item>
     </string-array>
 
     <string-array name="intensity_levels_array">

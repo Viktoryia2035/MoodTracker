@@ -1,9 +1,8 @@
 package com.mindhealth.EmoMind
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.animation.AnimationUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 class RedactorProfileActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
-    private var login: String? = null
-    private var startX: Float = 0f
-    private var endX: Float = 0f
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_redactor_profile)
@@ -22,78 +19,43 @@ class RedactorProfileActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(this)
 
         // Получаем логин пользователя из Intent
-        login = intent.getStringExtra("LOGIN")
+        val login = intent.getStringExtra("LOGIN")
+        Log.d("RedactorProfileActivity", "Login: $login")
 
+        // Найдем поля для имени, логина и пароля
         val nameEditText = findViewById<EditText>(R.id.editTextName)
+        val loginEditText = findViewById<EditText>(R.id.editTextText) // Поле для логина
         val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
-        val saveButton = findViewById<Button>(R.id.buttonCreateAccount)
 
-        // Получаем текущие данные пользователя
+        // Загрузим данные пользователя по логину и отобразим их
         login?.let { userLogin ->
-            val currentPassword = databaseHelper.getPassword(userLogin)
-            val currentName = databaseHelper.getAllUsers().find { it.first == userLogin }?.second
+            val name = databaseHelper.getUsername(userLogin) // Получаем имя пользователя
+            val password = databaseHelper.getPassword(userLogin) // Получаем пароль
 
-            // Устанавливаем текущие значения в поля редактирования
-            currentName?.let { nameEditText.setText(it) }
-            currentPassword?.let { passwordEditText.setText(it) }
+            // Устанавливаем данные в EditText
+            nameEditText.setText(name ?: "")
+            loginEditText.setText(userLogin) // Устанавливаем логин
+            passwordEditText.setText(password ?: "")
         }
 
+        // Обрабатываем нажатие кнопки "Сохранить"
+        val saveButton = findViewById<Button>(R.id.buttonCreateAccount)
         saveButton.setOnClickListener {
             val newName = nameEditText.text.toString()
             val newPassword = passwordEditText.text.toString()
+            val newLogin = loginEditText.text.toString() // Get the new login from the EditText
 
-            // Обновляем данные пользователя
-            login?.let { userLogin ->
-                val isUpdated = databaseHelper.updateUser(userLogin, newName, newPassword)
+            // Обновляем данные пользователя в базе данных
+            login?.let { userLogin -> // This is the old login
+                val isUpdated = databaseHelper.updateUser(userLogin, newLogin, newName, newPassword)
 
                 if (isUpdated) {
                     Toast.makeText(this, "Профиль успешно обновлен", Toast.LENGTH_SHORT).show()
-                    finish()
+                    finish() // Закрываем активность после успешного обновления
                 } else {
                     Toast.makeText(this, "Ошибка обновления профиля", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-        // Handle swipe gestures
-        window.decorView.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    startX = event.x
-                    true
-                }
-                MotionEvent.ACTION_UP -> {
-                    endX = event.x
-                    if (endX > startX) {
-                        swipeRight()  // Swipe right
-                    } else if (startX > endX) {
-                        swipeLeft()   // Swipe left
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    // Swipe left
-    private fun swipeLeft() {
-        val animation = AnimationUtils.loadAnimation(this, R.anim.swipe_left)
-        window.decorView.startAnimation(animation)
-
-        val profileIntent = Intent(this, ProfileActivity::class.java)
-        profileIntent.putExtra("LOGIN", intent.getStringExtra("LOGIN"))
-        startActivity(profileIntent)
-        finish()
-    }
-
-    // Swipe right
-    private fun swipeRight() {
-        val animation = AnimationUtils.loadAnimation(this, R.anim.swipe_right)
-        window.decorView.startAnimation(animation)
-
-        val profileIntent = Intent(this, ProfileActivity::class.java)
-        profileIntent.putExtra("LOGIN", intent.getStringExtra("LOGIN"))
-        startActivity(profileIntent)
-        finish()
     }
 }

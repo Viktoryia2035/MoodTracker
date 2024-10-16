@@ -1,5 +1,6 @@
 package com.mindhealth.EmoMind
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
@@ -18,11 +19,12 @@ class AddingNoteActivity : AppCompatActivity() {
     private var startX: Float = 0f
     private var endX: Float = 0f
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_note)
 
-        val databaseHelper = DatabaseHelper(this) // Подключение к базе данных
+        val databaseHelper = DatabaseHelper(this)
 
         val spinnerTopics: Spinner = findViewById(R.id.spinnerTopics)
         val topics = resources.getStringArray(R.array.topics_array)
@@ -37,23 +39,18 @@ class AddingNoteActivity : AppCompatActivity() {
             val comment = editTextComment.text.toString()
             val selectedTopic = spinnerTopics.selectedItem.toString()
 
-            // Получаем текущее время
             val currentTimestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
-            // Сохраняем заметку в базу данных
             val isAdded = databaseHelper.addNote(selectedTopic, comment, currentTimestamp)
 
             if (isAdded) {
-                // Если запись успешно добавлена, переходим на главную страницу
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             } else {
-                // Выводим сообщение об ошибке
-                Toast.makeText(this, "Ошибка при сохранении заметки", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.note_error), Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Логика свайпов
         window.decorView.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -63,9 +60,9 @@ class AddingNoteActivity : AppCompatActivity() {
                 MotionEvent.ACTION_UP -> {
                     endX = event.x
                     if (endX > startX) {
-                        swipeRight()  // Свайп вправо
+                        swipeRight()
                     } else if (startX > endX) {
-                        swipeLeft()   // Свайп влево
+                        swipeLeft()
                     }
                     true
                 }

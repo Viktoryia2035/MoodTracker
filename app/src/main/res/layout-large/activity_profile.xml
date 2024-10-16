@@ -8,70 +8,17 @@
     android:padding="32dp">
 
     <ImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/imageViewLogo"
         android:layout_width="190dp"
         android:layout_height="190dp"
-        android:contentDescription="@string/profile_picture"
+        android:layout_marginBottom="432dp"
+        android:src="@drawable/image_2024_09_21_13_00_45"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewUserName"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textViewUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_name"
-        android:textColor="#24ADAD"
-        android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.793"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009" />
-
-    <Switch
-        android:id="@+id/switchMoodReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mood_reminder"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383" />
-
-    <Switch
-        android:id="@+id/switchGoalReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/goal_reminder"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
-
-    <TextView
-        android:id="@+id/textViewNotificationSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/notification_settings"
-        android:textColor="#24ADAD"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
 
     <Button
         android:id="@+id/buttonSingOut"
@@ -85,10 +32,26 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.689" />
+
+    <Button
+        android:id="@+id/buttonEditProfile"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_shape"
+        android:padding="14dp"
+        android:text="@string/edit_profile"
+        android:textColor="#EBEADB"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373" />
 
     <Button
         android:id="@+id/buttonGoToMain"
@@ -102,26 +65,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEditProfile"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/buttonEditProfile"
-        android:layout_width="800dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_button_shape"
-        android:padding="14dp"
-        android:text="@string/edit_profile"
-        android:textColor="#EBEADB"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625" />
+        app:layout_constraintVertical_bias="0.057" />
 
     <Button
         android:id="@+id/buttonDeleteAccount"
@@ -132,11 +79,11 @@
         android:text="@string/delete_account"
         android:textColor="#EB0A0A"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSingOut"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGoToMain"
-        app:layout_constraintVertical_bias="0.593" />
+        app:layout_constraintVertical_bias="0.836" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

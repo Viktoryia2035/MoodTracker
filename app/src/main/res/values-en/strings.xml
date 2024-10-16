@@ -34,6 +34,7 @@
 
     <string name="add_note" translatable="true">Add note</string>
     <string name="topic_prompt" translatable="true">Select topic</string>
+    <string name="note_error">Error when saving a note</string>
 
     <string name="login" translatable="true">LOG IN</string>
     <string name="login_hint" translatable="true">Login</string>
@@ -47,24 +48,30 @@
     <string name="error_empty_password">Please, enter your password</string>
 
     <string name="set_goal" translatable="true">Set goal</string>
-    <string name="mood_statistics" translatable="true">Mood statistics</string>
     <string name="go_to_profile" translatable="true">Go to profile</string>
 
-    <string name="mood_analysis" translatable="true">Mood analysis</string>
-    <string name="analyze" translatable="true">Analyze</string>
-    <string name="time_filter_prompt" translatable="true">Select a time period</string>
+    <string name="mood_analysis" translatable="true">Mood report</string>
 
     <string name="user_name" translatable="true">User name</string>
     <string name="go_to_main" translatable="true">Go to main</string>
     <string name="edit_profile" translatable="true">Edit profile</string>
     <string name="notification_settings" translatable="true">Notification settings</string>
     <string name="mood_reminder" translatable="true">Reminder to add a mood</string>
+    <string name="goals_reminder" translatable="true">Goals reminder</string>
     <string name="goal_reminder" translatable="true">Goal reminder</string>
     <string name="delete_account" translatable="true">Delete account</string>
     <string name="sign_out" translatable="true">Log out of account</string>
     <string name="profile_picture" translatable="false">User\'s photo</string>
     <string name="set_time">Set time</string>
     <string name="mood_reminder_time">Mood reminder time</string>
+
+    <string name="notification_set">Notification set for: %1$s</string>
+    <string name="enter_valid_date">Enter the date in the correct format dd.mm.yy and not earlier than the next day</string>
+    <string name="goal_saved">Goal saved!</string>
+    <string name="goal_save_error">Error saving the goal.</string>
+    <string name="goal_reminder_title">Goal Reminder</string>
+    <string name="goal_reminder_text">It\'s time to achieve: %1$s</string>
+    <string name="notification_permission_request">Please allow notifications</string>
 
     <string name="editing" translatable="false">EDITING</string>
     <string name="name_hint" translatable="true">Name</string>

@@ -7,7 +7,6 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
-// Структура для хранения пользователя
 typedef struct {
     char *username;
     char *password;
@@ -16,13 +15,11 @@ typedef struct {
 static User *users = NULL;
 static int user_count = 0;
 
-// Функция для добавления пользователя
-JNIEXPORT jboolean JNICALL
+__attribute__((unused)) JNIEXPORT jboolean JNICALL
 Java_com_mindhealth_EmoMind_NativeLib_addUser(JNIEnv *env, jobject obj, jstring username, jstring password) {
     const char *username_c = (*env)->GetStringUTFChars(env, username, 0);
     const char *password_c = (*env)->GetStringUTFChars(env, password, 0);
 
-    // Проверка на существующих пользователей
     for (int i = 0; i < user_count; i++) {
         if (strcmp(users[i].username, username_c) == 0) {
             LOGE("Пользователь с именем %s уже существует.", username_c);
@@ -32,7 +29,6 @@ Java_com_mindhealth_EmoMind_NativeLib_addUser(JNIEnv *env, jobject obj, jstring 
         }
     }
 
-    // Увеличение массива пользователей
     users = realloc(users, sizeof(User) * (user_count + 1));
     users[user_count].username = strdup(username_c);
     users[user_count].password = strdup(password_c);
@@ -45,8 +41,7 @@ Java_com_mindhealth_EmoMind_NativeLib_addUser(JNIEnv *env, jobject obj, jstring 
     return JNI_TRUE;
 }
 
-// Функция для проверки пользователя
-JNIEXPORT jboolean JNICALL
+__attribute__((unused)) JNIEXPORT jboolean JNICALL
 Java_com_mindhealth_EmoMind_NativeLib_isUserValid(JNIEnv *env, jobject obj, jstring username, jstring password) {
     const char *username_c = (*env)->GetStringUTFChars(env, username, 0);
     const char *password_c = (*env)->GetStringUTFChars(env, password, 0);
@@ -66,8 +61,7 @@ Java_com_mindhealth_EmoMind_NativeLib_isUserValid(JNIEnv *env, jobject obj, jstr
     return JNI_FALSE;
 }
 
-// Функция для освобождения памяти (можно вызывать при завершении приложения)
-JNIEXPORT void JNICALL
+__attribute__((unused)) JNIEXPORT void JNICALL
 Java_com_mindhealth_EmoMind_NativeLib_freeUsers(JNIEnv *env, jobject obj) {
 for (int i = 0; i < user_count; i++) {
 free(users[i].username);

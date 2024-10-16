@@ -5,25 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECEBDE"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewMoodAnalysis"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/image_2024_09_21_13_00_45" />
+    android:padding="16dp"
+    tools:context=".MoodAnalysisActivity">
 
     <TextView
         android:id="@+id/textViewMoodAnalysis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mood_analysis"
+        android:text="Отчет по настроению"
         android:textColor="#24ADAD"
         android:textSize="20sp"
         android:textStyle="normal"
@@ -32,44 +21,59 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/reportTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.289"
+        tools:text="Mood analysis report will appear here..." />
 
     <Spinner
-        android:id="@+id/spinnerTimeFilter"
-        android:layout_width="280dp"
+        android:id="@+id/periodSpinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_spinner_shape"
+        android:entries="@array/period_array"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.306"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.209" />
 
-    <Button
-        android:id="@+id/buttonAnalyze"
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_button_shape"
-        android:padding="12dp"
-        android:text="@string/analyze"
-        android:textColor="#EBEADB"
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMoodAnalysis"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/image_2024_09_21_13_00_45"
+        tools:ignore="UnknownIdInLayout" />
 
-    <FrameLayout
-        android:id="@+id/frameLayoutChart"
-        android:layout_width="334dp"
-        android:layout_height="400dp"
+    <Spinner
+        android:id="@+id/dataTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/data_type_array"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.306"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.143" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

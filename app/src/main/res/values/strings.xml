@@ -34,6 +34,7 @@
 
     <string name="add_note" translatable="true">Добавить заметку</string>
     <string name="topic_prompt" translatable="true">Выберите тему</string>
+    <string name="note_error">Ошибка при сохранении заметки</string>
 
     <string name="login" translatable="true">ВОЙТИ</string>
     <string name="login_hint" translatable="true">Логин</string>
@@ -47,24 +48,30 @@
     <string name="error_empty_password">Пожалуйста, введите ваш пароль</string>
 
     <string name="set_goal" translatable="true">Установить цель</string>
-    <string name="mood_statistics" translatable="true">Статистика настроения</string>
     <string name="go_to_profile" translatable="true">Перейти в профиль</string>
 
-    <string name="mood_analysis" translatable="true">Анализ настроения</string>
-    <string name="analyze" translatable="true">Анализировать</string>
-    <string name="time_filter_prompt" translatable="true">Выберите период времени</string>
+    <string name="mood_analysis" translatable="true">Отчет по настроению</string>
 
     <string name="user_name" translatable="true">Имя пользователя</string>
     <string name="go_to_main" translatable="true">На главную</string>
     <string name="edit_profile" translatable="true">Редактировать профиль</string>
     <string name="notification_settings" translatable="true">Настройки уведомлений</string>
     <string name="mood_reminder" translatable="true">Напоминание о добавлении настроения</string>
-    <string name="goal_reminder" translatable="true">Напоминание о целях</string>
+    <string name="goals_reminder" translatable="true">Напоминание о целях</string>
+    <string name="goal_reminder" translatable="true">Напоминание о цели</string>
     <string name="delete_account" translatable="true">Удалить аккаунт</string>
     <string name="sign_out" translatable="true">Выйти из аккаунта</string>
     <string name="profile_picture" translatable="false">Фото пользователя</string>
     <string name="set_time">Установить время</string>
     <string name="mood_reminder_time">Время напоминания о настроении</string>
+
+    <string name="notification_set">Уведомление установлено на: %1$s</string>
+    <string name="enter_valid_date">Введите дату в корректном формате (дд.мм.гг), не ранее следующего дня</string>
+    <string name="goal_saved">Цель сохранена!</string>
+    <string name="goal_save_error">Ошибка при сохранении цели</string>
+    <string name="goal_reminder_title">Напоминание о цели</string>
+    <string name="goal_reminder_text">Пора выполнить: %1$s</string>
+    <string name="notification_permission_request">Пожалуйста, разрешите уведомления</string>
 
     <string name="editing" translatable="false">РЕДАКТИРОВАНИЕ</string>
     <string name="name_hint" translatable="true">Имя</string>
@@ -78,7 +85,6 @@
     <string name="error_adding_user">Ошибка при добавлении пользователя. Попробуйте еще раз</string>
     <string name="error_empty_fields">Пожалуйста, заполните все поля</string>
     <string name="name_exists">Имя пользователя уже существует.</string>
-
     <string name="set_goals" translatable="false">Установка целей</string>
     <string name="notes" translatable="false">Заметки</string>
     <string name="deadlines" translatable="false">Сроки (дд.мм.гг)</string>

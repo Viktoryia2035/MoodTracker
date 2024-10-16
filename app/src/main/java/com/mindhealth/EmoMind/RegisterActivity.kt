@@ -19,7 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var nativeLib: NativeLib
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var editTextName: EditText
-    private lateinit var editTextText: EditText
+    private lateinit var editTextUsername: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var createAccountButton: Button
@@ -33,14 +33,14 @@ class RegisterActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
 
         editTextName = findViewById(R.id.editTextName)
-        editTextText = findViewById(R.id.editTextText)
+        editTextUsername = findViewById(R.id.editTextText)
         editTextPassword = findViewById(R.id.editTextPassword)
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
         createAccountButton = findViewById(R.id.buttonCreateAccount)
 
         createAccountButton.setOnClickListener {
             val name = editTextName.text.toString().trim()
-            val username = editTextText.text.toString().trim()
+            val username = editTextUsername.text.toString().trim()
             val password = editTextPassword.text.toString().trim()
             val confirmPassword = editTextConfirmPassword.text.toString().trim()
 
@@ -64,13 +64,17 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Хранение данных пользователя в SharedPreferences
             val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
             with(sharedPreferences.edit()) {
-                putString("NAME", name)
+                putString("username", username)
+                putString("name", name)
+                putString("password", password)
                 apply()
             }
 
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("LOGIN", username)
             intent.putExtra("NAME", name)
             startActivity(intent)
             finish()

@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button_shape"
         android:padding="14dp"
-        android:text="@string/mood_statistics"
+        android:text="@string/mood_analysis"
         android:textColor="#EBEADB"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -9,4 +9,3 @@ class NativeLib {
     external fun isUserValid(username: String, password: String): Boolean
     external fun freeUsers()
 }
-

@@ -17,20 +17,29 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
+        // Получаем логин из Intent или SharedPreferences
         login = intent.getStringExtra("LOGIN")
 
         if (login == null) {
             val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-            login = sharedPreferences.getString("LOGIN", null)
+            login = sharedPreferences.getString("username", null)
         }
 
+        // Получаем имя из Intent или SharedPreferences
         name = intent.getStringExtra("NAME")
 
+        if (name == null) {
+            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+            name = sharedPreferences.getString("name", null) // Получаем имя, если оно не передано через Intent
+        }
+
+        // Логируем всех пользователей в базе данных (если это нужно)
         val users = dbHelper.getAllUsers()
         for (user in users) {
             Log.d("Users", "Login: ${user.first}, Name: ${user.second}")
         }
 
+        // Логика для кнопок
         val addMoodButton = findViewById<Button>(R.id.buttonAddMood)
         addMoodButton.setOnClickListener {
             val intent = Intent(this, AddingMoodActivity::class.java)
@@ -69,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val profileButton = findViewById<Button>(R.id.buttonAddPhoto)
         profileButton.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("NAME", name)
+            intent.putExtra("LOGIN", login)
             startActivity(intent)
         }
     }

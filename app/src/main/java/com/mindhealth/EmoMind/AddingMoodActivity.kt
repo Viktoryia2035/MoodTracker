@@ -22,7 +22,6 @@ class AddingMoodActivity : AppCompatActivity() {
     private var endX: Float = 0f
     private var selectedEmotions: MutableList<String> = mutableListOf()
     private var selectedMood: String? = null
-    private var userId: Long? = null
 
     @SuppressLint("MissingInflatedId", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,21 +32,6 @@ class AddingMoodActivity : AppCompatActivity() {
 
         val saveMoodButton = findViewById<Button>(R.id.buttonSaveMood)
         val commentEditText = findViewById<EditText>(R.id.editTextComment)
-
-        val login = intent.getStringExtra("LOGIN")
-
-        if (login != null) {
-            userId = databaseHelper.getUserId(login)
-            if (userId == null) {
-                Toast.makeText(this, getString(R.string.user_not_found_error), Toast.LENGTH_SHORT).show()
-                finish()
-                return
-            }
-        } else {
-            Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
 
         val textViewHorrible = findViewById<TextView>(R.id.textViewHorrible)
         val imageView5 = findViewById<ImageView>(R.id.imageView5)
@@ -115,37 +99,21 @@ class AddingMoodActivity : AppCompatActivity() {
         }
 
         saveMoodButton.setOnClickListener {
-            if (login != null) {
-                val userId = databaseHelper.getUserId(login)
+            val mood = selectedMood!!
+            val comment = commentEditText.text.toString()
+            val emotionsString = selectedEmotions.joinToString(", ")
 
-                when {
-                    userId == null -> {
-                        Toast.makeText(this, getString(R.string.user_not_found_error), Toast.LENGTH_SHORT).show()
-                    }
-                    selectedMood == null -> {
-                        Toast.makeText(this, getString(R.string.no_mood_selected_error), Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-                        val mood = selectedMood!!
-                        val comment = commentEditText.text.toString()
-                        val emotionsString = selectedEmotions.joinToString(", ")
+            val currentDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
-                        val currentDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+            val isSuccess = databaseHelper.addMood(mood, currentDate, comment, emotionsString)
 
-                        val isSuccess = databaseHelper.addMood(userId, mood, currentDate, comment, emotionsString)
-
-                        if (isSuccess) {
-                            Toast.makeText(this, getString(R.string.mood_saved_success), Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this, getString(R.string.mood_save_error), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+            if (isSuccess) {
+                Toast.makeText(this, getString(R.string.mood_saved_success), Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             } else {
-                Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.mood_save_error), Toast.LENGTH_SHORT).show()
             }
         }
 

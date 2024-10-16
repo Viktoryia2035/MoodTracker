@@ -17,7 +17,7 @@ object LocaleManager {
         saveLanguage(context, lang)
     }
 
-    fun updateResources(context: Context, locale: Locale) {
+    private fun updateResources(context: Context, locale: Locale) {
         val config = context.resources.configuration
         config.setLocale(locale)
         config.setLayoutDirection(locale)

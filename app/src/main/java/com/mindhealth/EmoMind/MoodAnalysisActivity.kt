@@ -1,72 +1,137 @@
 package com.mindhealth.EmoMind
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.animation.AnimationUtils
-import android.widget.ArrayAdapter
-import android.widget.Button
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MoodAnalysisActivity : AppCompatActivity() {
-    private var startX: Float = 0f
-    private var endX: Float = 0f
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var reportTextView: TextView
+    private lateinit var periodSpinner: Spinner
+    private lateinit var dataTypeSpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood_analysis)
 
-        val periodSpinner = findViewById<Spinner>(R.id.spinnerTimeFilter)
-        val periods = resources.getStringArray(R.array.period_array)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, periods)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        periodSpinner.adapter = adapter
+        dbHelper = DatabaseHelper(this)
+        reportTextView = findViewById(R.id.reportTextView)
+        periodSpinner = findViewById(R.id.periodSpinner)
+        dataTypeSpinner = findViewById(R.id.dataTypeSpinner)
 
-        val analyzeButton = findViewById<Button>(R.id.buttonAnalyze)
-        analyzeButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        // Action for data type selection
+        dataTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                fetchDataForSelectedTypeAndPeriod(dataTypeSpinner.selectedItem.toString(), periodSpinner.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        window.decorView.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    startX = event.x
-                    true
-                }
-                MotionEvent.ACTION_UP -> {
-                    endX = event.x
-                    if (endX > startX) {
-                        swipeRight()  // Свайп вправо
-                    } else if (startX > endX) {
-                        swipeLeft()   // Свайп влево
-                    }
-                    true
-                }
-                else -> false
+        // Existing listeners
+        periodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                fetchDataForSelectedTypeAndPeriod(dataTypeSpinner.selectedItem.toString(), periodSpinner.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+    }
+
+    private fun fetchDataForSelectedTypeAndPeriod(dataType: String, period: String) {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val endDate = dateFormat.format(calendar.time)
+
+        val startDate = when (period) {
+            "День" -> dateFormat.format(calendar.time)
+            "Неделя" -> {
+                calendar.add(Calendar.DAY_OF_YEAR, -7)
+                dateFormat.format(calendar.time)
+            }
+            "Месяц" -> {
+                calendar.add(Calendar.MONTH, -1)
+                dateFormat.format(calendar.time)
+            }
+            else -> dateFormat.format(calendar.time)
+        }
+
+        when (dataType) {
+            "Настроения" -> {
+                val moods = dbHelper.getMoodsForPeriod(startDate, endDate)
+                displayMoods(moods, period)
+            }
+            "Заметки" -> {
+                val notes = dbHelper.getNotesForPeriod(startDate, endDate) // Create this function in DatabaseHelper
+                displayNotes(notes)
+            }
+            "Занятия" -> {
+                val activities = dbHelper.getActivitiesForPeriod(startDate, endDate) // Create this function in DatabaseHelper
+                displayActivities(activities)
+            }
+            "Цели" -> {
+                val goals = dbHelper.getGoalsForPeriod(startDate, endDate) // Create this function in DatabaseHelper
+                displayGoals(goals)
             }
         }
     }
 
-    private fun swipeLeft() {
-        val animation = AnimationUtils.loadAnimation(this, R.anim.swipe_left)
-        window.decorView.startAnimation(animation)
-
-        val mainIntent = Intent(this, MainActivity::class.java)
-        mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(mainIntent)
-        finish()
+    private fun displayMoods(moods: List<Mood>, period: String) {
+        val report = StringBuilder()
+        report.append("Отчет по настроению за период: $period\n\n")
+        if (moods.isEmpty()) {
+            report.append("Нет данных за выбранный период.\n")
+        } else {
+            for (mood in moods) {
+                report.append("- Настроение: ${mood.mood}, Эмоции: ${mood.emotions}\n")
+            }
+        }
+        reportTextView.text = report.toString()
     }
 
-    private fun swipeRight() {
-        val animation = AnimationUtils.loadAnimation(this, R.anim.swipe_right)
-        window.decorView.startAnimation(animation)
+    private fun displayNotes(notes: List<Note>) {
+        val report = StringBuilder()
+        report.append("Отчет по заметкам:\n\n")
+        if (notes.isEmpty()) {
+            report.append("Нет заметок за выбранный период.\n")
+        } else {
+            for (note in notes) {
+                report.append("- Тема: ${note.topic}, Комментарий: ${note.comment}\n")
+            }
+        }
+        reportTextView.text = report.toString()
+    }
 
-        val mainIntent = Intent(this, MainActivity::class.java)
-        mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(mainIntent)
-        finish()
+    private fun displayActivities(activities: List<Activity>) {
+        val report = StringBuilder()
+        report.append("Отчет по занятиям:\n\n")
+        if (activities.isEmpty()) {
+            report.append("Нет занятий за выбранный период.\n")
+        } else {
+            for (activity in activities) {
+                report.append("- Занятие: ${activity.activityName}, Категория: ${activity.category}\n")
+            }
+        }
+        reportTextView.text = report.toString()
+    }
+
+    private fun displayGoals(goals: List<Goal>) {
+        val report = StringBuilder()
+        report.append("Отчет по целям:\n\n")
+        if (goals.isEmpty()) {
+            report.append("Нет целей за выбранный период.\n")
+        } else {
+            for (goal in goals) {
+                report.append("- Цель: ${goal.goal}, Срок: ${goal.deadline}\n")
+            }
+        }
+        reportTextView.text = report.toString()
     }
 }

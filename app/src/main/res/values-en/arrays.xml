@@ -41,17 +41,23 @@
         <item>Sport</item>
     </string-array>
 
+    <string-array name="data_type_array">
+        <item>Moods</item>
+        <item>Notes</item>
+        <item>Activities</item>
+        <item>Goals</item>
+    </string-array>
+
     <string-array name="period_array">
         <item>Today</item>
         <item>Week</item>
         <item>Month</item>
-        <item>Year</item>
     </string-array>
 
     <string-array name="intensity_levels_array">
         <item>Light</item>
         <item>Moderate</item>
-        <item>Severe</item>
+        <item>Hard</item>
     </string-array>
 
     <string-array name="languages">

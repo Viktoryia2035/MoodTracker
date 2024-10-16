@@ -31,14 +31,14 @@ class AddingEvent : AppCompatActivity() {
         val durationEditText = findViewById<EditText>(R.id.editTextDuration)
         val commentsEditText = findViewById<EditText>(R.id.editTextComments)
         val intensitySpinner = findViewById<Spinner>(R.id.spinnerIntensity)
-        val categorySpinner = findViewById<Spinner>(R.id.spinnerTags) // Assuming you have a category spinner
+        val categorySpinner = findViewById<Spinner>(R.id.spinnerTags)
 
         val intensityLevels = resources.getStringArray(R.array.intensity_levels_array)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, intensityLevels)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         intensitySpinner.adapter = adapter
 
-        val categories = resources.getStringArray(R.array.tags_array) // Add this to your strings.xml
+        val categories = resources.getStringArray(R.array.tags_array)
         val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         categorySpinner.adapter = categoryAdapter
