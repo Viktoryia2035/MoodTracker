@@ -7,19 +7,23 @@
     android:background="#ECEBDE"
     android:padding="32dp">
 
-    <TextView
-        android:id="@+id/reportTextView"
-        android:layout_width="900dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="284dp"
-        android:padding="16dp"
-        android:textColor="#000"
-        android:textSize="16sp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Mood analysis report will appear here..." />
+        app:layout_constraintTop_toBottomOf="@+id/dataTypeSpinner"
+        app:layout_constraintVertical_bias="0.289">
+
+        <LinearLayout
+            android:id="@+id/reportLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
     <Spinner
         android:id="@+id/periodSpinner"
@@ -54,10 +58,10 @@
         android:entries="@array/data_type_array"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
         android:id="@+id/textViewMoodAnalysis"
