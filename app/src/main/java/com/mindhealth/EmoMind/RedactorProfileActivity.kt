@@ -18,42 +18,36 @@ class RedactorProfileActivity : AppCompatActivity() {
 
         databaseHelper = DatabaseHelper(this)
 
-        // Получаем логин пользователя из Intent
         val login = intent.getStringExtra("LOGIN")
         Log.d("RedactorProfileActivity", "Login: $login")
 
-        // Найдем поля для имени, логина и пароля
         val nameEditText = findViewById<EditText>(R.id.editTextName)
-        val loginEditText = findViewById<EditText>(R.id.editTextText) // Поле для логина
+        val loginEditText = findViewById<EditText>(R.id.editTextText)
         val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
 
-        // Загрузим данные пользователя по логину и отобразим их
         login?.let { userLogin ->
-            val name = databaseHelper.getUsername(userLogin) // Получаем имя пользователя
-            val password = databaseHelper.getPassword(userLogin) // Получаем пароль
+            val name = databaseHelper.getUsername(userLogin)
+            val password = databaseHelper.getPassword(userLogin)
 
-            // Устанавливаем данные в EditText
             nameEditText.setText(name ?: "")
-            loginEditText.setText(userLogin) // Устанавливаем логин
+            loginEditText.setText(userLogin)
             passwordEditText.setText(password ?: "")
         }
 
-        // Обрабатываем нажатие кнопки "Сохранить"
         val saveButton = findViewById<Button>(R.id.buttonCreateAccount)
         saveButton.setOnClickListener {
             val newName = nameEditText.text.toString()
             val newPassword = passwordEditText.text.toString()
-            val newLogin = loginEditText.text.toString() // Get the new login from the EditText
+            val newLogin = loginEditText.text.toString()
 
-            // Обновляем данные пользователя в базе данных
-            login?.let { userLogin -> // This is the old login
+            login?.let { userLogin ->
                 val isUpdated = databaseHelper.updateUser(userLogin, newLogin, newName, newPassword)
 
                 if (isUpdated) {
-                    Toast.makeText(this, "Профиль успешно обновлен", Toast.LENGTH_SHORT).show()
-                    finish() // Закрываем активность после успешного обновления
+                    Toast.makeText(this, getString(R.string.profile_updated_successfully), Toast.LENGTH_SHORT).show()
+                    finish()
                 } else {
-                    Toast.makeText(this, "Ошибка обновления профиля", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.profile_update_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }

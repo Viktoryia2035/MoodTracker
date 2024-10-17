@@ -64,7 +64,6 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Хранение данных пользователя в SharedPreferences
             val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
             with(sharedPreferences.edit()) {
                 putString("username", username)

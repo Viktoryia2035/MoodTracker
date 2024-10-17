@@ -11,7 +11,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class SettingGoalsActivity : AppCompatActivity() {
     private var startX: Float = 0f
@@ -40,13 +42,14 @@ class SettingGoalsActivity : AppCompatActivity() {
             val goalInput = goalEditText.text.toString()
             val deadlineInput = deadlineEditText.text.toString()
             val notesInput = notesEditText.text.toString()
+            val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time)
 
             if (!isValidDateFormat(deadlineInput)) {
                 Toast.makeText(this, getString(R.string.enter_valid_date), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val success = dbHelper.addGoal(goalInput, deadlineInput, notesInput)
+            val success = dbHelper.addGoal(goalInput, deadlineInput, notesInput, timestamp)
             if (success) {
                 Toast.makeText(this, getString(R.string.goal_saved), Toast.LENGTH_SHORT).show()
             } else {

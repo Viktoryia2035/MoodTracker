@@ -78,8 +78,8 @@ class LoginActivity : AppCompatActivity() {
 
                 val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                 with(sharedPreferences.edit()) {
-                    putString("username", login) // Используем "username" для логина
-                    putString("name", name) // Сохраняем имя пользователя
+                    putString("username", login)
+                    putString("name", name)
                     apply()
                 }
 

@@ -32,6 +32,27 @@
     <string name="selected_mood_good">Выбрано настроение: Хорошо</string>
     <string name="selected_mood_super">Выбрано настроение: Супер</string>
 
+    <string name="account_deleted_successfully">Аккаунт успешно удален</string>
+    <string name="failed_to_delete_account">Не удалось удалить аккаунт</string>
+
+    <string name="profile_updated_successfully">Profile updated successfully</string>
+    <string name="profile_update_error">Error updating profile</string>
+
+    <string name="please_select_filters">Пожалуйста, выберите фильтры</string>
+    <string name="error_getting_date_range">Ошибка в получении диапазона дат</string>
+    <string name="no_mood_data">Нет данных по настроению за выбранный период</string>
+    <string name="no_notes">Нет заметок за выбранный период</string>
+    <string name="no_activities">Нет занятий за выбранный период</string>
+    <string name="no_goals">Нет целей за выбранный период</string>
+    <string name="delete_confirmation_title">Удалить запись?</string>
+    <string name="delete_confirmation_message">Вы уверены, что хотите удалить эту запись?</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="mood_label">Настроение: %1$s\nДата: %2$s\nКомментарий: %3$s\nЭмоции: %4$s\n\n</string>
+    <string name="note_label">Тема: %1$s\nКомментарий: %2$s\nДата: %3$s\n\n</string>
+    <string name="activity_label">Название: %1$s\nКатегория: %2$s\nИнтенсивность: %3$s\nДлительность: %4$s\nКомментарии: %5$s\n\n</string>
+    <string name="goal_label">Цель: %1$s\nСрок: %2$s\nЗаметки: %3$s\n\n</string>
+
     <string name="add_note" translatable="true">Добавить заметку</string>
     <string name="topic_prompt" translatable="true">Выберите тему</string>
     <string name="note_error">Ошибка при сохранении заметки</string>
